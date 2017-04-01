@@ -2,9 +2,12 @@ language: go
 go:
   - tip
 env:
+  - secure: "BmShY+D+cNPlKnTtzjiB1z5/S0ouGYVpMy8pKhWZO1777MCtFRQB96R6mPp9rMw7Pbb457j9l7o36u31eaJyfSDtSvjH+YiFPaFanWZCZSTyZYooEaeR9RMleyM/H56Uzyy4zTjuOHxgaBZp0RQAGc1WXH3lWSnBO/q6aDNDueARuXUVHEPBo1K0vicnBvlauTf6ofVjcci9t33YqHe+lOWSDgyipARFP3SMo21ZA4w4cV/K5tE/GVn4bdER2ZVQlL1Z66v6TIF8HM358oRSIZmrssBd1XAD/D+1flTudn1to1xKtYPsgt8hoSfH/1o4l/3yqryvysIwZROM/uaAqshBeG7E4rme/7PgMg00ZnUXYbYv4xQT1XwfopTn8kD9WReeZbS6nlAOTUgTl1e6/cRftm/snED6/mMfRu/CRTXZAGR7ltMHcdQEmVD+DKJteyjI8TVtlL7H4TSxqXK37ngHXLVDXM5UcXAOZXP5STaGZSs8fEeDWG4RCgUhRrsQU4uETlvXUPCTwTUUSAbtdQeulmX1eoCjkbrIG6TRL4WcNFmIpWt4RlsCZf6fr5Hg6UiU/37TTuDk8Cs6WiEulXWZMDs+FfRwM0dsGAF61gQhY4iHbb4J6jZ/82zEpfL+xA2vjS6VEMtW0kZQvtYWVq1W/JP56eDtLmjEcxEDvJ4="
 before_install:
   - go get golang.org/x/tools/cmd/cover
   - go get github.com/mattn/goveralls
+
 script:
     - go test -v -covermode=count -coverprofile=coverage.out -benchmem -bench .
+    - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
     - go version
