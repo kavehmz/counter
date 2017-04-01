@@ -33,7 +33,7 @@ func TestCounter_Inc(t *testing.T) {
 	if n := <-ch; n != 1 {
 		t.Error("Incorrect increment", n)
 	}
-
+	time.Sleep(time.Second * 1)
 	c.Inc(ch)
 	if n := <-ch; n != 2 {
 		t.Error("Incorrect increment", n)
