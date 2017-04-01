@@ -1,6 +1,7 @@
 package counter
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -42,5 +43,35 @@ func TestCounter_Inc(t *testing.T) {
 	c.Inc(ch)
 	if n := <-ch; n != 1 {
 		t.Error("Incorrect increment", n)
+	}
+}
+
+func ExampleCounter() {
+	tmpfile, _ := ioutil.TempFile("", "test")
+	defer os.Remove(tmpfile.Name())
+
+	c, _ := Init(tmpfile.Name(), 0, 2)
+	ch := make(chan int)
+	c.Inc(ch)
+	fmt.Println(<-ch)
+	c.Inc(ch)
+	fmt.Println(<-ch)
+	c.Inc(ch)
+	fmt.Println(<-ch)
+	// Output:
+	// 1
+	// 2
+	// 3
+}
+
+func BenchmarkInc(b *testing.B) {
+	tmpfile, _ := ioutil.TempFile("", "test")
+	defer os.Remove(tmpfile.Name())
+
+	c, _ := Init(tmpfile.Name(), 0, 2)
+	ch := make(chan int)
+	for i := 0; i < b.N; i++ {
+		c.Inc(ch)
+		<-ch
 	}
 }
