@@ -24,14 +24,14 @@ $ go run example/main.go
 package main
 
 import (
-	"fmt"
-	"github.com/kavehmz/counter"
+    "fmt"
+    "github.com/kavehmz/counter"
 )
 
 func main() {
-	c := counter.Init("/tmp/counter", time.Second, 60)
-	ch := make(chan int)
-	c.Inc(ch)
+    c := counter.Init("/tmp/counter", time.Second, 60)
+    ch := make(chan int)
+    c.Inc(ch)
     fmt.Println(<-ch)
 }
 ```
