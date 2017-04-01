@@ -22,7 +22,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	var e error
-	c, e = counter.Init("/tmp/a", time.Second, 10)
+	c, e = counter.Init("/tmp/counter", time.Second, 60)
 	if e != nil {
 		log.Fatal(e)
 	}
