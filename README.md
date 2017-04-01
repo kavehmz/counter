@@ -17,7 +17,7 @@ $ go get github.com/kavehmz/counter
 # Usage
 ```bash
 # to test it as a http server you can do:
-$ go run example/main.go
+$ go run -race example/main.go
 ```
 
 ```go
