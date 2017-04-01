@@ -32,7 +32,7 @@ type Counter struct {
 }
 
 // Init will setup a counter and loads the initial value if the file exists
-// It accepts a filename and buffersize and lenght of history to keep
+// It accepts a filename and buffersize and length of history to keep
 func Init(fn string, btime time.Duration, h int) (*Counter, error) {
 	f, err := os.OpenFile(fn, os.O_RDWR|os.O_CREATE, 0755)
 	if err != nil {
