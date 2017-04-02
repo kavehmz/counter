@@ -1,0 +1,9 @@
+{
+	"ImportPath": "github.com/kavehmz/counter",
+	"GoVersion": "go1.8",
+	"Packages": [
+		"./cmd/..."
+	],
+	"Deps": [
+	]
+}
