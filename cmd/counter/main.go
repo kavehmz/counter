@@ -27,9 +27,6 @@ func main() {
 	if os.Getenv("HOST") == "" {
 		log.Fatal("HOST must be set")
 	}
-	if os.Getenv("REDISURL") == "" {
-		log.Fatal("REDISURL must be set")
-	}
 
 	var e error
 	c, e = counter.Init("/tmp/counter", time.Second, 60)
