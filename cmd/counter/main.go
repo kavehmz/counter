@@ -31,7 +31,7 @@ func main() {
 		log.Fatal(e)
 	}
 
-	http.HandleFunc("/", handler)
+	http.HandleFunc("/count", handler)
 
 	maxServingClients := 2
 	maxClientsPool := make(chan bool, maxServingClients)
