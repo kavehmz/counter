@@ -24,9 +24,6 @@ func main() {
 	if os.Getenv("PORT") == "" {
 		log.Fatal("PORT must be set")
 	}
-	if os.Getenv("HOST") == "" {
-		log.Fatal("HOST must be set")
-	}
 
 	var e error
 	c, e = counter.Init("/tmp/counter", time.Second, 60)
