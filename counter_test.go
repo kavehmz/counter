@@ -46,6 +46,32 @@ func TestCounter_Inc(t *testing.T) {
 	}
 }
 
+func TestCounter_IncAfterSave(t *testing.T) {
+	tmpfile, _ := ioutil.TempFile("", "test")
+	defer os.Remove(tmpfile.Name())
+
+	c, _ := Init(tmpfile.Name(), time.Millisecond, 10)
+	ch := make(chan int)
+	c.Inc(ch)
+	<-ch
+
+	c.file.Sync()
+	time.Sleep(time.Millisecond * 100)
+	c, _ = Init(tmpfile.Name(), 0, 10)
+	c.Inc(ch)
+	if n := <-ch; n != 2 {
+		t.Error("Incorrect increment", n)
+	}
+
+	c.file.Sync()
+	time.Sleep(time.Second)
+	c, _ = Init(tmpfile.Name(), 0, 1)
+	c.Inc(ch)
+	if n := <-ch; n != 1 {
+		t.Error("Incorrect increment", n)
+	}
+}
+
 func ExampleCounter() {
 	tmpfile, _ := ioutil.TempFile("", "test")
 	defer os.Remove(tmpfile.Name())

@@ -109,7 +109,9 @@ func (c *Counter) load() error {
 		c.set(b, t, i)
 	}
 	b.next = c.statBegin
-	c.statEnd = c.statBegin
+	if c.statEnd == nil {
+		c.statEnd = c.statBegin
+	}
 
 	return err
 }
@@ -119,6 +121,7 @@ func (c *Counter) set(s *stat, t []item, j int) {
 		s.Epoch = t[j].Epoch
 		s.Count = t[j].Count
 		c.count += t[j].Count
+		c.statEnd = s
 	}
 }
 
