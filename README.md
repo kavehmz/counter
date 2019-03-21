@@ -37,4 +37,4 @@ func main() {
 ```
 
 # Algorithm
-This lib is using and travesing a linked list  to keep track of counts.
+This lib is using and traversing a linked list to keep track of counts.
